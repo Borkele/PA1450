@@ -25,4 +25,4 @@ def create_parser(subparsers):
     parser.set_defaults(command=serve)
     # Add optional parameters to control the server configuration
     parser.add_argument("-p", "--port", default=8080, type=int, help="The port to listen on")
-    parser.add_argument("--address", default="0.0.0.0", help="The address to listen on")
+    parser.add_argument("--address", default="127.0.0.1", help="The address to listen on")
