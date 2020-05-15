@@ -1,5 +1,4 @@
 """Module for serving an API."""
-
 from flask import Flask, send_file
 
 def serve(options):
