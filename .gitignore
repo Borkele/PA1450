@@ -12,7 +12,8 @@ __pycache__
 .vscode/settings.json
 
 # Ignore local data
-.application/data/*
+application/data/*
 
 # Ignore localy generated graphs
-.application/graphs/*
+application/graphs/*
+
