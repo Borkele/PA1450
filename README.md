@@ -69,3 +69,7 @@ The main entrypoint of the application is the `application/main.py` file. It con
 Each available command is located within the `application/commands` directory. Each command file defines a `create_parser` method which sets up the command's command line argument parser.
 
 Lastly, the `www` directory contains the static web files used for the demonstrational website.
+
+### Yes :)
+
+![Smile](./smile.jpg)
