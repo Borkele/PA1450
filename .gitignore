@@ -10,3 +10,10 @@ __pycache__
 
 # Ignore vs code settings
 .vscode/settings.json
+
+# Ignore local data
+application/data/*
+
+# Ignore localy generated graphs
+application/graphs/*
+

@@ -1,5 +1,5 @@
 """Module for serving an API."""
-from flask import Flask, send_file
+from flask import Flask, render_template
 
 def serve(options):
     """Serve an API."""
@@ -10,12 +10,8 @@ def serve(options):
     @app.route("/")
     def index():
         """Return the index page of the website."""
-        return send_file("../www/index.html")
+        return render_template('hello.html')
 
-    @app.route("/greeting/<name>")
-    def greeting(name):
-        """Return a greeting for the user."""
-        return "Hello, {}!".format(name)
 
     app.run(host=options.address, port=options.port, debug=True)
 
