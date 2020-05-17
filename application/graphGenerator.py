@@ -33,6 +33,7 @@ def generateGraph(dataFrame, timeFrame):
             ax.xaxis.grid(True)
             ax.yaxis.grid(True)
             ax.set_title("Past 24h in °C")
+            ax.xaxis.set_minor_locator(mdates.HourLocator())
             fig.set_size_inches(8, 5)
             fig.autofmt_xdate()
         try:
