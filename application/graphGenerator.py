@@ -24,7 +24,7 @@ def generateGraph(dataFrame, timeFrame):
         try:
             plot = dataFrame.plot()
             fig = plot.get_figure()
-            fig.savefig(f"application/static/image/{timeFrame}.png")
+            fig.savefig(f"static/image/{timeFrame}.png")
             return True
         except Exception:
             return False

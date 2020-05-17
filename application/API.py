@@ -27,14 +27,13 @@ def getAPIJson(timeFrame):
 
             return lst2['value']
 
-        if (api.status_code() == 200):
-            lst = api.json()
+        lst = api.json()
 
-            dataFrame = pd.DataFrame(lst["value"])
+        dataFrame = pd.DataFrame(lst["value"])
 
-            date_df = pd.to_datetime(dataFrame['date'], unit='ms')
-            value_df = pd.to_numeric(dataFrame['value'])
+        date_df = pd.to_datetime(dataFrame['date'], unit='ms')
+        value_df = pd.to_numeric(dataFrame['value'])
 
-            dataFrame['date'] = date_df
-            dataFrame['value'] = value_df
-            return dataFrame
+        dataFrame['date'] = date_df
+        dataFrame['value'] = value_df
+        return dataFrame
