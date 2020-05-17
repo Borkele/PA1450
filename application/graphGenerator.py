@@ -14,17 +14,29 @@ def generateGraph(dataFrame, timeFrame):
 
     if (timeFrame != ''):
         if (timeFrame == 'month'):
-                ax.xaxis.set_major_locator(mdates.DayLocator())
-                ax.xaxis.set_major_formatter(mdates.DateFormatter('%b-%d'))
+            fig, ax = plt.subplots()
+            ax.plot(dataFrame.index, dataFrame['value'])
+            ax.xaxis.set_major_locator(mdates.MonthLocator())
+            ax.xaxis.set_major_formatter(mdates.DateFormatter('%b-%d'))
+            ax.xaxis.grid(True)
+            ax.yaxis.grid(True)
+            ax.set_title("Past 3 months in °C")
+            ax.xaxis.set_minor_locator(mdates.WeekdayLocator())
+            fig.set_size_inches(18, 5)
+            fig.autofmt_xdate()
           
         elif (timeFrame == 'day'):
-                ax.xaxis.set_major_locator(mdates.DayLocator())
-                ax.xaxis.set_major_formatter(mdates.DateFormatter('%b-%d %H:%M'))
-
+            fig, ax = plt.subplots()
+            ax.plot(dataFrame.index, dataFrame['value'])
+            ax.xaxis.set_major_locator(mdates.HourLocator())
+            ax.xaxis.set_major_formatter(mdates.DateFormatter('%H:00'))
+            ax.xaxis.grid(True)
+            ax.yaxis.grid(True)
+            ax.set_title("Past 24h in °C")
+            fig.set_size_inches(10, 5)
+            fig.autofmt_xdate()
         try:
-            plot = dataFrame.plot()
-            fig = plot.get_figure()
-            fig.savefig(f"static/image/{timeFrame}.png")
+            fig.savefig(f"static/image/{timeFrame}.png", bbox_inches='tight')
             return True
         except Exception:
             return False
