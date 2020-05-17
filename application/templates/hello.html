@@ -2,8 +2,18 @@
 
 {% block content %} 
 <div class="d-flex p-3 my-3 text-white-50 bg-purple rounded shadow-sm">
-    <img src="{{ url_for('static', filename='/image/map_pin.png') }}" class="p-2" style="width:80px;height:80px;"></img>
+    <img src="{{ url_for('static', filename='/image/map_pin.png') }}" alt="Map pin image" class="p-2" style="width:80px;height:80px;"></img>
     <h1 class="text_primary p-2">Karlskrona</h1>
 </div>
+<div class="container"></div>
+    <div class="row">
+        <div class="col-sm-4">
+            <h1 class="display-1">69 &#8451;</h1>
+        </div>
+        <div class="col-sm-8">
+            <h1>Temperature history</h1>
+            <img src="{{ url_for('static', filename='image/output.png') }}" alt="Temperature graph">
+        </div>
+    </div>
     
 {% endblock content %} 
