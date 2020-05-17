@@ -14,28 +14,20 @@ def generateGraph(dataFrame, timeFrame):
 
     if (timeFrame != ''):
         if (timeFrame == 'month'):
-            try:
                 ax.xaxis.set_major_locator(mdates.DayLocator())
                 ax.xaxis.set_major_formatter(mdates.DateFormatter('%b-%d'))
-                
-                plot = dataFrame.plot()
-                fig = plot.get_figure()
-                fig.savefig(f"application/static/image/{timeFrame}.png")
-                return True
-            except Exception:
-                return False            
-
+          
         elif (timeFrame == 'day'):
-            try:
                 ax.xaxis.set_major_locator(mdates.DayLocator())
                 ax.xaxis.set_major_formatter(mdates.DateFormatter('%b-%d %H:%M'))
 
-                plot = dataFrame.plot()
-                fig = plot.get_figure()
-                fig.savefig(f"application/static/image/{timeFrame}.png")
-                return True
-            except Exception:
-                return False
+        try:
+            plot = dataFrame.plot()
+            fig = plot.get_figure()
+            fig.savefig(f"application/static/image/{timeFrame}.png")
+            return True
+        except Exception:
+            return False
 
     else: 
         return False
