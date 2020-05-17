@@ -6,7 +6,7 @@ def generateGraph(dataFrame, timeFrame):
     """
     Takes a given pandas dataframe and converts it to a graph and saves it to the graphs folder.
     dataFrame: Converts the entire given data frame to a graph
-    tiemFrame: The dates/time to show on the x axies
+    timeFrame: The dates/time to show on the x axies
     """
     dataFrame.set_index(['date'], inplace=True)
 
@@ -22,7 +22,6 @@ def generateGraph(dataFrame, timeFrame):
                 fig = plot.get_figure()
                 fig.savefig(f"application/graphs/{timeFrame}.png")
                 return True
-
             except Exception:
                 return False            
 
