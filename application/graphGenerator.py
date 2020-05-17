@@ -28,7 +28,7 @@ def generateGraph(dataFrame, timeFrame):
         elif (timeFrame == 'day'):
             fig, ax = plt.subplots()
             ax.plot(dataFrame.index, dataFrame['value'])
-            ax.xaxis.set_major_locator(mdates.HourLocator())
+            ax.xaxis.set_major_locator(mdates.HourLocator(interval=2))
             ax.xaxis.set_major_formatter(mdates.DateFormatter('%H:00'))
             ax.xaxis.grid(True)
             ax.yaxis.grid(True)
