@@ -6,7 +6,7 @@ def getAPIJson(timeFrame):
     """
     Returns a pandas tempratuere dataframe from SMHI
     Inputs:
-    hour: Returns data from the last h
+    hour: Returns a string of the last h temprature
     day: Returns data from the last 24 h
     month: Returns data from the last 3 months
 
