@@ -14,6 +14,6 @@ __pycache__
 # Ignore local data
 application/data/*
 
-# Ignore localy generated graphs
-application/graphs/*
+# Ignore locally generated graphs
+application/static/image/graphs/*
 

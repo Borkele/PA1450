@@ -33,10 +33,10 @@ def generateGraph(dataFrame, timeFrame):
             ax.xaxis.grid(True)
             ax.yaxis.grid(True)
             ax.set_title("Past 24h in °C")
-            fig.set_size_inches(10, 5)
+            fig.set_size_inches(8, 5)
             fig.autofmt_xdate()
         try:
-            fig.savefig(f"static/image/{timeFrame}.png", bbox_inches='tight')
+            fig.savefig(f"static/image/graphs/{timeFrame}.png", bbox_inches='tight')
             return True
         except Exception:
             return False
