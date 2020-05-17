@@ -1,11 +1,16 @@
 from flask import Flask, render_template
 
+from API import getAPIJson
+from graphGenerator import generateGraph
+
 app = Flask(__name__)
 
 @app.route("/")
 def index():
     """Return the index page of the website."""
-    return render_template('hello.html')
+    temperature = getAPIJson("hour")
+    
+    return render_template('hello.html', temperature = temperature)
 
 
 
