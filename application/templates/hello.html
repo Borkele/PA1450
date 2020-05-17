@@ -1,6 +1,9 @@
 {% extends "layout.html" %}
 
 {% block content %} 
-    <h1>Hello, world!</h1>
-    <img src="{{ url_for('static', filename='/image/weatherImage.png') }}" class="rounded"></img>
+<div class="d-flex p-3 my-3 text-white-50 bg-purple rounded shadow-sm">
+    <img src="{{ url_for('static', filename='/image/map_pin.png') }}" class="p-2" style="width:80px;height:80px;"></img>
+    <h1 class="text_primary p-2">Karlskrona</h1>
+</div>
+    
 {% endblock content %} 
