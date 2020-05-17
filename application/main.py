@@ -1,25 +1,14 @@
-"""Main module of the application"""
+from flask import Flask, render_template
 
-from argparse import ArgumentParser
+app = Flask(__name__)
 
-# Innan var det application.commands
-from commands import serve, greet
+@app.route("/")
+def index():
+    """Return the index page of the website."""
+    return render_template('hello.html')
 
-def main():
-    """Main method of the application."""
-    # Create an argument parser for parsing CLI arguments
-    parser = ArgumentParser(description="An example application")
-    # Create collection of subparsers, one for each command such as "download"
-    subparsers = parser.add_subparsers(dest="command")
-    subparsers.required = True
 
-    # Add the parser for each specific command
-    serve.create_parser(subparsers)
-    greet.create_parser(subparsers)
 
-    # Parse the arguments and execute the chosen command
-    options = parser.parse_args()
-    options.command(options)
 
 if __name__ == "__main__":
-    main()
+    app.run(host='127.0.0.1', port='8080', debug=True)
