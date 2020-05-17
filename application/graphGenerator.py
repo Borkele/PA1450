@@ -20,7 +20,7 @@ def generateGraph(dataFrame, timeFrame):
                 
                 plot = dataFrame.plot()
                 fig = plot.get_figure()
-                fig.savefig(f"application/graphs/{timeFrame}.png")
+                fig.savefig(f"application/static/image/{timeFrame}.png")
                 return True
             except Exception:
                 return False            
@@ -32,7 +32,7 @@ def generateGraph(dataFrame, timeFrame):
 
                 plot = dataFrame.plot()
                 fig = plot.get_figure()
-                fig.savefig(f"application/graphs/{timeFrame}.png")
+                fig.savefig(f"application/static/image/{timeFrame}.png")
                 return True
             except Exception:
                 return False

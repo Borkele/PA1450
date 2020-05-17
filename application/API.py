@@ -20,7 +20,13 @@ def getAPIJson(timeFrame):
         
         elif (timeFrame == 'hour'):
             api = requests.get('https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/1/station/65090/period/latest-hour/data.json')
-        
+
+            lst = api.json()
+
+            lst2 = lst['value'].pop()
+
+            return lst2['value']
+
         if (api.status_code() == 200):
             lst = api.json()
 
