@@ -12,7 +12,7 @@ def index():
 
     generateGraph(getAPIJson("day"), "day")
     
-    return render_template('hello.html', temperature = temperature)
+    return render_template('homepage.html', temperature = temperature)
 
 
 
