@@ -8,7 +8,7 @@ def generateGraph(dataFrame, timeFrame):
     dataFrame: Converts the entire given data frame to a graph
     timeFrame: The dates/time to show on the x axies
     """
-    dataFrame.set_index(['date'], inplace=True)
+    
 
     fig, ax = plt.subplots(figsize=(15,15))
 
