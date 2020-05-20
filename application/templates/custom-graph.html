@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block content %} 
+
+<div class="container rounded shadow-sm p-5">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Enter a timeframe</legend>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        {{ form.start_date.label(class="form-control-label") }}
+
+                        {% if form.start_date.errors %}
+                            {{ form.start_date(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.start_date.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        
+                        {% else %}
+                            {{ form.start_date(class="form-control") }}
+                        {% endif %}
+                        
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        {{ form.end_date.label(class="form-control-label") }}
+                        {% if form.end_date.errors %}
+                            {{ form.end_date(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.end_date.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        
+                        {% else %}
+                            {{ form.end_date(class="form-control") }}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        {{ form.submit(class="btn btn-outline-info") }}
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+
+{% endblock content %} 

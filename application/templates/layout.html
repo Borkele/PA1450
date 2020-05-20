@@ -23,16 +23,29 @@
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="">Home</a>
+            <a class="nav-link" href="/">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="">Custom Graph</a>
+            <a class="nav-link" href="/custom-graph">Custom Graph</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">Forecasts</a>
           </li>
         </ul>
       </div>
     </nav>
 
     <main role="main" class="container" style="margin-top: 100px;">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
       {% block content %} {% endblock %}
     </main>
 
