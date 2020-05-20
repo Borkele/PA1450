@@ -8,9 +8,9 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     """Return the index page of the website."""
-    temperature = getAPIJson("hour")
+    temperature = getAPIJson("hour", "temperature")
 
-    generateGraph(getAPIJson("day"), "day")
+    generateGraph(getAPIJson("day", "temperature"), "day")
     
     return render_template('homepage.html', temperature = temperature)
 

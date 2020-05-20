@@ -5,42 +5,64 @@ from datetime import datetime
 def getAPIJson(timeFrame, dataType):
     """
     Returns a pandas tempratuere dataframe from SMHI
-    Inputs:
+    timeFrame inputs:
     hour: Returns a string of the last h temprature
     day: Returns data from the last 24 h
     month: Returns data from the last 3 months
 
+    dataType inputs:
+    temperature: retruns celsius/h
+    precipitation: returns precipitation/h in mm
+    wind: retruns wind avrage/h
+    sight: returns sight in meter every h
+    presusre: sea presure/h
+
+
     """
     if (dataType != ''):
         if (dataType == 'temperature'):
-            if (timeFrame != ''):
-                if (timeFrame == 'day'):
-                    api = requests.get('https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/1/station/65090/period/latest-day/data.json')
+            parameter = '1'
+        elif (dataType == 'precipitation'):
+            parameter = '7'
+        elif (dataType == 'wind'):
+            parameter = '4'
+        elif (dataType == 'sight'):
+            parameter = '12'
+        elif (dataType == 'presusre'):
+            parameter = '9'
+        else:
+            return False
+
+        if (timeFrame != ''):
+            if (timeFrame == 'day'):
+                timeFrameValue = 'latest-day'
                 
-                elif (timeFrame == 'month'):
-                    api = requests.get('https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/1/station/65090/period/latest-months/data.json')
-                
-                elif (timeFrame == 'hour'):
-                    api = requests.get('https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/1/station/65090/period/latest-hour/data.json')
-
-                    lst = api.json()
-
-                    lst2 = lst['value'].pop()
-
-                    return lst2['value']
+            elif (timeFrame == 'month'):
+                timeFrameValue = 'latest-months'
+            
+            elif (timeFrame == 'hour'):
+                api = requests.get(f'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/{parameter}/station/65090/period/latest-hour/data.json')
 
                 lst = api.json()
 
-                dataFrame = pd.DataFrame(lst["value"])
+                lst2 = lst['value'].pop()
 
-                date_df = pd.to_datetime(dataFrame['date'], unit='ms')
-                value_df = pd.to_numeric(dataFrame['value'])
+                return lst2['value']
 
-                dataFrame['date'] = date_df
-                dataFrame['value'] = value_df
-                dataFrame.set_index(['date'], inplace=True)
+            api = requests.get(f'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/{parameter}/station/65090/period/{timeFrameValue}/data.json')
 
-                return dataFrame
+            lst = api.json()
+
+            dataFrame = pd.DataFrame(lst["value"])
+
+            date_df = pd.to_datetime(dataFrame['date'], unit='ms')
+            value_df = pd.to_numeric(dataFrame['value'])
+
+            dataFrame['date'] = date_df
+            dataFrame['value'] = value_df
+            dataFrame.set_index(['date'], inplace=True)
+
+            return dataFrame
 
         else:
             return False
