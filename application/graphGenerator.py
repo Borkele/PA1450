@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 
-def generateGraph(dataFrame, timeFrame, dataType):
+def generateGraph(dataFrame, timeFrame, dataType, name):
     """
     Takes a given pandas dataframe and converts it to a graph and saves it to the graphs folder.
     dataFrame: Converts the entire given data frame to a graph
@@ -13,7 +13,7 @@ def generateGraph(dataFrame, timeFrame, dataType):
     precipitation
     wind
     sight
-    presusre
+    pressure
     """  
     
     fig, ax = plt.subplots(figsize=(15,15))
@@ -50,12 +50,12 @@ def generateGraph(dataFrame, timeFrame, dataType):
                 ax.set_title("wind in m/s")
             elif (dataType == 'sight'):
                 ax.set_title("sight in meters")
-            elif (dataType == 'presusre'):
-                ax.set_title("presusre in hectopascal")
+            elif (dataType == 'pressure'):
+                ax.set_title("pressure in hectopascal")
             else:
                 return False
 
-            fig.savefig(f"static/image/graphs/{timeFrame}.png", bbox_inches='tight')
+            fig.savefig(f"static/image/graphs/{name}.png", bbox_inches='tight')
             return True
 
         except Exception:

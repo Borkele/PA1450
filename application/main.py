@@ -14,7 +14,7 @@ def index():
     """Return the index page of the website."""
     temperature = getAPIJson("hour", "temperature")
 
-    generateGraph(getAPIJson("day", "temperature"), "day", "temperature")
+    generateGraph(getAPIJson("day", "temperature"), "day", "temperature", "homePage")
     
     return render_template('homepage.html', temperature = temperature)
 

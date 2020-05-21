@@ -15,7 +15,7 @@ def getAPIJson(timeFrame, dataType):
     precipitation: returns precipitation/h in mm
     wind: retruns wind avrage/h
     sight: returns sight in meter every h
-    presusre: sea presure/h
+    pressure: sea presure/h
 
 
     """
@@ -28,7 +28,7 @@ def getAPIJson(timeFrame, dataType):
             parameter = '4'
         elif (dataType == 'sight'):
             parameter = '12'
-        elif (dataType == 'presusre'):
+        elif (dataType == 'pressure'):
             parameter = '9'
         else:
             return False
