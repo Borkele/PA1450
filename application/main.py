@@ -3,7 +3,7 @@ import datetime
 
 from API import getAPIJson
 from graphGenerator import generateGraph
-from forms import graph_timeframe
+from forms import graph_timeframe, select_weekday
 
 app = Flask(__name__)
 
@@ -37,6 +37,19 @@ def custom():
         return redirect('')
     
     return render_template('custom-graph.html', form = form)
+
+@app.route("/summary", methods=["GET", "POST"])
+def custom_weekday():
+    """Returns a webpage that lets you custom graphs based on a given weekday"""
+    form = select_weekday()
+    if form.validate_on_submit():
+        #maybe not a needed variable
+        weekday = form.weekday.data
+        flash("Graph successfully generated", 'success')
+
+        #TODO send weekday information to the graph generator
+
+    return render_template('summary.html', form = form)
 
 
 

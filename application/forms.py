@@ -7,3 +7,7 @@ class graph_timeframe(FlaskForm):
     start_date = DateField('Start date, format mm/dd/yyyy', format='%m/%d/%Y', validators=[data_required(message="Please enter a date.")])
     end_date = DateField('End date, format mm/dd/yyyy', format='%m/%d/%Y', validators=[data_required(message="Please enter a date.")])
     submit = SubmitField('Generate!')
+
+class select_weekday(FlaskForm):
+    weekday = SelectField('Select weekday', choices = [('monday', 'Monday'), ('tuesday', 'Tuesday'), ('wednesday', 'Wednesday'), ('thursday', 'Thursday'), ('friday', 'Friday'), ('saturday', 'Saturday'), ('sunday', 'Sunday')])
+    submit = SubmitField('Generate!')

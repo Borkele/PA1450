@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="container rounded shadow-sm p-5">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend> Select a weekday to generate a graph!</legend>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        {{ form.weekday.label(class="form-control-label")}}
+                        
+                        <!-- No need to check for errors because it is a selectfield -->
+                        {{ form.weekday(class="form-control") }}
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        {{ form.submit(class="btn btn-outline-info") }}
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+
+</div>
+
+
+{% endblock content %}
