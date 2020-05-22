@@ -5,7 +5,6 @@ from API import getAPIJson
 from graphGenerator import generateGraph
 from forms import graph_timeframe, select_weekday
 from timeFrame import translateDateFormat, trimTimeFrame
-from forms import graph_timeframe
 
 app = Flask(__name__)
 
