@@ -4,6 +4,8 @@ import datetime
 from API import getAPIJson
 from graphGenerator import generateGraph
 from forms import graph_timeframe, select_weekday
+from timeFrame import translateDateFormat, trimTimeFrame
+from forms import graph_timeframe
 
 app = Flask(__name__)
 
@@ -24,14 +26,15 @@ def custom():
     form = graph_timeframe()
 
     if form.validate_on_submit():
-        start_date = form.start_date.data
-        end_date = form.end_date.data
+        start_date = translateDateFormat(str(form.start_date.data))
+        end_date = translateDateFormat(str(form.end_date.data))
         data_type = form.data_type.data
         
         if(start_date < end_date):
             flash("Graph successfully generated!", 'success')
 
-            # TODO send date information to the graph generator
+            generateGraph(trimTimeFrame(getAPIJson("month", data_type), start_date, end_date), "day", data_type, "custom")
+
         else:
             flash("Error: The start date must be before the end date.", 'danger')
         return redirect('')
@@ -50,9 +53,6 @@ def custom_weekday():
         #TODO send weekday information to the graph generator
 
     return render_template('summary.html', form = form)
-
-
-
 
 
 if __name__ == "__main__":
