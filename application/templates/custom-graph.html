@@ -6,8 +6,27 @@
     <form method="POST" action="">
         {{ form.hidden_tag() }}
         <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Enter a timeframe</legend>
+            <legend class="border-bottom mb-4">Generate a custom graph!</legend>
             <div class="row">
+
+                <div class="col">
+                    <div class="form-group">
+                        {{ form.data_type.label(class="form-control-label") }}
+
+                        {% if form.data_type.errors %}
+                            {{ form.data_type(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.data_type.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        
+                        {% else %}
+                            {{ form.data_type(class="form-control") }}
+                        {% endif %}
+
+                    </div>
+                </div>
                 <div class="col">
                     <div class="form-group">
                         {{ form.start_date.label(class="form-control-label") }}

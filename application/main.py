@@ -26,15 +26,16 @@ def custom():
     if form.validate_on_submit():
         start_date = form.start_date.data
         end_date = form.end_date.data
+        data_type = form.data_type.data
         
         if(start_date < end_date):
             flash("Graph successfully generated!", 'success')
+
+            # TODO send date information to the graph generator
         else:
             flash("Error: The start date must be before the end date.", 'danger')
         return redirect('')
     
-        # TODO send date information to the graph generator
-
     return render_template('custom-graph.html', form = form)
 
 
