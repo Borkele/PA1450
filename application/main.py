@@ -3,6 +3,7 @@ import datetime
 
 from API import getAPIJson
 from graphGenerator import generateGraph
+from timeFrame import translateDateFormat
 from forms import graph_timeframe
 
 app = Flask(__name__)
@@ -24,8 +25,8 @@ def custom():
     form = graph_timeframe()
 
     if form.validate_on_submit():
-        start_date = form.start_date.data
-        end_date = form.end_date.data
+        start_date = translateDateFormat(str(form.start_date.data))
+        end_date = translateDateFormat(str(form.end_date.data))
         data_type = form.data_type.data
         
         if(start_date < end_date):
