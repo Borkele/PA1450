@@ -3,7 +3,7 @@ import datetime
 
 from API import getAPIJson
 from graphGenerator import generateGraph
-from timeFrame import translateDateFormat
+from timeFrame import translateDateFormat, trimTimeFrame
 from forms import graph_timeframe
 
 app = Flask(__name__)
@@ -32,15 +32,13 @@ def custom():
         if(start_date < end_date):
             flash("Graph successfully generated!", 'success')
 
-            # TODO send date information to the graph generator
+            generateGraph(trimTimeFrame(getAPIJson("month", data_type), start_date, end_date), "day", data_type, "custom")
+
         else:
             flash("Error: The start date must be before the end date.", 'danger')
         return redirect('')
     
     return render_template('custom-graph.html', form = form)
-
-
-
 
 
 if __name__ == "__main__":
