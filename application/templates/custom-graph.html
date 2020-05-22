@@ -72,6 +72,10 @@
         </fieldset>
     </form>
 </div>
-
+{% if graph_generated %} 
+    <div class="container rounded shadow-sm p-5">
+        <img src="{{ url_for('static', filename='image/graphs/custom.png') }}" alt="Custom generated graph">
+    </div>
+{% endif %}
 
 {% endblock content %} 

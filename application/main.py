@@ -1,5 +1,6 @@
 from flask import Flask, render_template, url_for, flash, redirect
 import datetime
+import os.path
 
 from API import getAPIJson
 from graphGenerator import generateGraph
@@ -9,6 +10,7 @@ from timeFrame import translateDateFormat, trimTimeFrame, getWeekdayIndex
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = '734e4610c36703ecb10f7716b7f2140f'
+app.config['SESSION_REFRESH_EACH_REQUEST']
 
 @app.route("/")
 def index():
@@ -23,6 +25,8 @@ def index():
 def custom():
     """Return a webpage that lets you create custom graphs."""
     form = graph_timeframe()
+    graph_generated = os.path.isfile('static/image/graphs/custom.png')
+
 
     if form.validate_on_submit():
         start_date = translateDateFormat(str(form.start_date.data))
@@ -30,15 +34,18 @@ def custom():
         data_type = form.data_type.data
         
         if(start_date < end_date):
-            flash("Graph successfully generated!", 'success')
-
-            generateGraph(trimTimeFrame(getAPIJson("month", data_type), start_date, end_date), "day", data_type, "custom")
+            graph_generated = generateGraph(trimTimeFrame(getAPIJson("month", data_type), start_date, end_date), "day", data_type, "custom")
+            
+            if(graph_generated):
+                flash("Graph successfully generated!", 'success')
+                return redirect('')
+            else:
+                flash("Graph generator failed! Please check your inputs.", 'danger')
 
         else:
             flash("Error: The start date must be before the end date.", 'danger')
-        return redirect('')
     
-    return render_template('custom-graph.html', form = form)
+    return render_template('custom-graph.html', form = form, graph_generated = graph_generated)
 
 @app.route("/summary", methods=["GET", "POST"])
 def custom_weekday():
