@@ -2,3 +2,4 @@ Pillow==7.0.0
 flask==1.1.1
 requests==2.23.0
 Flask-WTF==0.14.3
+pandas
