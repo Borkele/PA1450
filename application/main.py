@@ -37,7 +37,7 @@ def custom():
             graph_generated = generateGraph(trimTimeFrame(getAPIJson("month", data_type), start_date, end_date), "day", data_type, "custom")
             
             if(graph_generated):
-                flash("Graph successfully generated!", 'success')
+                flash("Graph successfully generated! You may have to refresh the page to see it.", 'success')
                 return redirect('')
             else:
                 flash("Graph generator failed! Please check your inputs.", 'danger')
@@ -51,18 +51,21 @@ def custom():
 def custom_weekday():
     """Returns a webpage that lets you custom graphs based on a given weekday"""
     form = select_weekday()
+    graph_generated = os.path.isfile('static/image/graphs/weekdayGraph.png')
+
+
     if form.validate_on_submit():
         weekday = form.weekday.data
-        flash("Graph successfully generated", 'success')
+        flash("Graph successfully generated! You may have to refresh the page to see it.", 'success')
 
         #maybe other datatypes than temperatures?
         data_frame =  getAPIJson("month", "temperature")
         weekdayindex = getWeekdayIndex(weekday)
         data_frame = data_frame[data_frame.index.weekday==weekdayindex]
-        generateGraph(data_frame, "month", "temperature", weekday + "Graph")
+        graph_generated = generateGraph(data_frame, "month", "temperature", "weekdayGraph")
         #TODO send the graph which has been generated to the webpage
 
-    return render_template('summary.html', form = form) 
+    return render_template('summary.html', form = form, graph_generated = graph_generated) 
 
 
 if __name__ == "__main__":
