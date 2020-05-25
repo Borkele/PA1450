@@ -4,7 +4,7 @@ import os.path
 
 from API import getAPIJson
 from graphGenerator import generateGraph
-from forms import graph_timeframe, select_weekday
+from forms import graph_timeframe, select_weekday, select_forecast
 from timeFrame import translateDateFormat, trimTimeFrame, getWeekdayIndex
 
 app = Flask(__name__)
@@ -35,7 +35,7 @@ def custom():
         time_frame = form.time_frame.data
         
         if(start_date < end_date):
-            graph_generated = generateGraph(trimTimeFrame(getAPIJson("month", data_type), start_date, end_date), "day", data_type, "custom")
+            graph_generated = generateGraph(trimTimeFrame(getAPIJson("month", data_type), start_date, end_date), time_frame, data_type, "custom")
             
             if(graph_generated):
                 flash("Graph successfully generated! You may have to refresh the page to see it.", 'success')
@@ -68,6 +68,17 @@ def custom_weekday():
 
     return render_template('summary.html', form = form, graph_generated = graph_generated) 
 
+@app.route("/forecasts", methods=["GET", "POST"])
+def forecasts():
+    """Returns a webpage that lets you generate graphs of two different weather forecasts so you can compare them."""
+    form = select_forecast()
+
+    if form.validate_on_submit():
+        forecast_type = form.forecast_type.data
+        flash("Graph successfully generated! You may have to refresh the page to see it.", 'success')
+    
+    
+    return render_template("forecasts.html", form = form)
 
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port='8080', debug=True)

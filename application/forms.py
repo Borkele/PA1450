@@ -12,3 +12,7 @@ class graph_timeframe(FlaskForm):
 class select_weekday(FlaskForm):
     weekday = SelectField('Select weekday', choices = [('monday', 'Monday'), ('tuesday', 'Tuesday'), ('wednesday', 'Wednesday'), ('thursday', 'Thursday'), ('friday', 'Friday'), ('saturday', 'Saturday'), ('sunday', 'Sunday')])
     submit = SubmitField('Generate!')
+
+class select_forecast(FlaskForm):
+    forecast_type = SelectField('Select weather data', choices = [ ('temperature', 'Temperature'), ('precipitation', 'Precipitation'), ('wind', 'Wind'), ('pressure', 'Air pressure') ])
+    submit = SubmitField('Generate!')

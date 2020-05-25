@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block content %} 
+
+<div class="container rounded shadow-sm p-5">
+    <fieldset class="form-group">
+        <legend class="border-bottom mb-4">Generate forecast graphs!</legend>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    {{ form.forecast_type.label(class="form-control-label") }}
+
+                    {% if form.forecast_type.errors %}
+                        {{ form.forecast_type(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.forecast_type.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    
+                    {% else %}
+                        {{ form.forecast_type(class="form-control") }}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    {{ form.submit(class="btn btn-outline-info") }}
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</div>    
+{% endblock content %} 
