@@ -2,7 +2,7 @@ from flask import Flask, render_template, url_for, flash, redirect
 import datetime
 import os.path
 
-from API import getAPIJson
+from API import getAPIJson, getAPIXML
 from graphGenerator import generateGraph
 from forms import graph_timeframe, select_weekday
 from timeFrame import translateDateFormat, trimTimeFrame, getWeekdayIndex
@@ -67,6 +67,9 @@ def custom_weekday():
 
     return render_template('summary.html', form = form, graph_generated = graph_generated) 
 
-
+@app.route("/test", methods=["GET", "POST"])
+def test():
+    data_frame = getAPIXML("temperature")
+    generateGraph(data_frame, "day", "temperature", "testGraph")
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port='8080', debug=True)
