@@ -77,6 +77,9 @@ def forecasts():
         forecast_type = form.forecast_type.data
         flash("Graph successfully generated! You may have to refresh the page to see it.", 'success')
         
+        data_frame = getAPIJson('', forecast_type, forecast=True)
+        generateGraph(data_frame, 'day', forecast_type, 'forecast2')
+
         data_frame = getAPIXML(forecast_type)
         graph_generated = generateGraph(data_frame, "day", forecast_type, "forecast1")
 
