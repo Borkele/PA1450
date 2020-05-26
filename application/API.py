@@ -115,7 +115,7 @@ def getAPIXML(data_type):
     dataframe = pd.DataFrame(data)
 
     #kolla med anton om vad fan ms är för det skedde en type error, måste det vara en integer ellet nåt sånt?
-    date_df = pd.to_datetime(dataframe['date'], unit='ms')
+    date_df = pd.to_datetime(dataframe['date'])
     value_df = pd.to_numeric(dataframe['value'])
 
     dataframe['date'] = date_df

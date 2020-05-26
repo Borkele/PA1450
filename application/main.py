@@ -72,5 +72,7 @@ def custom_weekday():
 def test():
     data_frame = getAPIXML("temperature")
     generateGraph(data_frame, "day", "temperature", "testGraph")
+    return render_template('test.html')
+
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port='8080', debug=True)
