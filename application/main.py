@@ -64,9 +64,20 @@ def custom_weekday():
         weekdayindex = getWeekdayIndex(weekday)
         data_frame = data_frame[data_frame.index.weekday==weekdayindex]
         graph_generated = generateGraph(data_frame, "month", "temperature", "weekdayGraph")
-        #TODO send the graph which has been generated to the webpage
 
     return render_template('summary.html', form = form, graph_generated = graph_generated) 
+
+@app.route("/forecasts", methods=["GET", "POST"])
+def forecasts():
+    """Returns a webpage that lets you generate graphs of two different weather forecasts so you can compare them."""
+    form = select_forecast()
+
+    if form.validate_on_submit():
+        forecast_type = form.forecast_type.data
+        flash("Graph successfully generated! You may have to refresh the page to see it.", 'success')
+        #TODO generate graphs of the chosen forecast type
+
+    return render_template("forecasts.html", form = form)
 
 @app.route("/test", methods=["GET", "POST"])
 def test():
