@@ -4,7 +4,7 @@ from datetime import datetime
 import xml.etree.ElementTree as ET
 
 
-def getAPIJson(timeFrame, dataType, APIType = 'SMHI'):
+def getAPIJson(timeFrame, dataType, forecast = False):
     """
     Returns a pandas tempratuere dataframe from SMHI
     timeFrame inputs:
@@ -21,8 +21,7 @@ def getAPIJson(timeFrame, dataType, APIType = 'SMHI'):
 
 
     """
-
-    if (APIType == 'SMHI'):
+    if (forecast == False):
         if (dataType != ''):
             if (dataType == 'temperature'):
                 parameter = '1'
@@ -57,13 +56,13 @@ def getAPIJson(timeFrame, dataType, APIType = 'SMHI'):
 
                 lst = api.json()
 
-                dataFrame = pd.DataFrame(lst["value"])
+                dataFrame = pd.DataFrame(lst['value'])
 
-                date_df = pd.to_datetime(dataFrame['date'], unit='ms')
-                value_df = pd.to_numeric(dataFrame['value'])
+                dateDf = pd.to_datetime(dataFrame['date'], unit='ms')
+                valueDf = pd.to_numeric(dataFrame['value'])
 
-                dataFrame['date'] = date_df
-                dataFrame['value'] = value_df
+                dataFrame['date'] = dateDf
+                dataFrame['value'] = valueDf
                 dataFrame.set_index(['date'], inplace=True)
 
                 return dataFrame
@@ -72,8 +71,41 @@ def getAPIJson(timeFrame, dataType, APIType = 'SMHI'):
                 return False
         else: 
             return False
-    else: 
-        return False
+    else:
+        api = requests.get('http://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/15/lat/56/data.json')
+
+        lst = api.json()
+
+        data = []
+
+        for time in lst["timeSeries"]:
+    
+            dict = {}
+            dict['date'] = time['validTime']
+
+            if dataType == "temperature":
+                dict['value'] = float(time['parameters'][11]['values'][0])
+            elif dataType == 'precipitation':
+                dict['value'] = float(time['parameters'][3]['values'][0])
+            elif dataType == 'wind':
+                dict['value'] = float(time['parameters'][14]['values'][0])
+            elif dataType == 'pressure':
+                dict['value'] = float(time['parameters'][10]['values'][0])
+
+            data.append(dict)
+
+        dataFrame = pd.DataFrame(data)
+
+        dateDf = pd.to_datetime(dataFrame['date'], format = '%Y-%m-%dT%H:%M:%SZ')
+        valueDf = pd.to_numeric(dataFrame['value'])
+
+        dataFrame['date'] = dateDf
+        dataFrame['value'] = valueDf
+        dataFrame.set_index(['date'], inplace=True)
+
+        return dataFrame
+
+
 
 def getAPIXML(data_type):
     """Returns a pandas tempratuere dataframe from yr.no
@@ -112,17 +144,17 @@ def getAPIXML(data_type):
             return False
         data.append(dict)
 
-    dataframe = pd.DataFrame(data)
+    dataFrame = pd.DataFrame(data)
 
     #kolla med anton om vad fan ms är för det skedde en type error, måste det vara en integer ellet nåt sånt?
 
-    date_df = pd.to_datetime(dataframe['date'], format = '%Y-%m-%dT%H:%M:%S')
+    dateDf = pd.to_datetime(dataFrame['date'], format = '%Y-%m-%dT%H:%M:%S')
 
-    value_df = pd.to_numeric(dataframe['value'])
+    valueDf = pd.to_numeric(dataFrame['value'])
 
-    dataframe['date'] = date_df
-    dataframe['value'] = value_df
-    dataframe.set_index(['date'], inplace=True)
+    dataFrame['date'] = dateDf
+    dataFrame['value'] = valueDf
+    dataFrame.set_index(['date'], inplace=True)
 
-    dataframe = dataframe.head(12)
-    return dataframe
+    dataFrame = dataFrame.head(12)
+    return dataFrame
