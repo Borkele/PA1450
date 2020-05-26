@@ -122,4 +122,5 @@ def getAPIXML(data_type):
     dataframe['value'] = value_df
     dataframe.set_index(['date'], inplace=True)
 
+    dataframe = dataframe.head(12)
     return dataframe
