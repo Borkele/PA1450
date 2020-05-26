@@ -18,7 +18,7 @@ def index():
     temperature = getAPIJson("hour", "temperature")
 
     generateGraph(getAPIJson("day", "temperature"), "day", "temperature", "homePage")
-    
+
     return render_template('homepage.html', temperature = temperature)
 
 @app.route("/custom-graph", methods=["GET", "POST"])
@@ -71,19 +71,17 @@ def custom_weekday():
 def forecasts():
     """Returns a webpage that lets you generate graphs of two different weather forecasts so you can compare them."""
     form = select_forecast()
+    graph_generated = os.path.isfile('static/image/graphs/forecast1.png')
 
     if form.validate_on_submit():
         forecast_type = form.forecast_type.data
         flash("Graph successfully generated! You may have to refresh the page to see it.", 'success')
-        #TODO generate graphs of the chosen forecast type
+        
+        data_frame = getAPIXML(forecast_type)
+        graph_generated = generateGraph(data_frame, "day", forecast_type, "forecast1")
 
-    return render_template("forecasts.html", form = form)
+    return render_template("forecasts.html", form = form, graph_generated = graph_generated)
 
-@app.route("/test", methods=["GET", "POST"])
-def test():
-    data_frame = getAPIXML("temperature")
-    generateGraph(data_frame, "day", "temperature", "testGraph")
-    return render_template('test.html')
 
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port='8080', debug=True)

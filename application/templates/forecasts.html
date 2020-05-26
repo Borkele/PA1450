@@ -3,34 +3,53 @@
 {% block content %} 
 
 <div class="container rounded shadow-sm p-5">
-    <fieldset class="form-group">
-        <legend class="border-bottom mb-4">Generate forecast graphs!</legend>
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    {{ form.forecast_type.label(class="form-control-label") }}
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Generate forecast graphs!</legend>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        {{ form.forecast_type.label(class="form-control-label") }}
 
-                    {% if form.forecast_type.errors %}
-                        {{ form.forecast_type(class="form-control is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.forecast_type.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    
-                    {% else %}
-                        {{ form.forecast_type(class="form-control") }}
-                    {% endif %}
+                        {% if form.forecast_type.errors %}
+                            {{ form.forecast_type(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.forecast_type.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        
+                        {% else %}
+                            {{ form.forecast_type(class="form-control") }}
+                        {% endif %}
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    {{ form.submit(class="btn btn-outline-info") }}
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        {{ form.submit(class="btn btn-outline-info") }}
+                    </div>
                 </div>
             </div>
+        </fieldset>
+    </form>
+</div>
+
+{% if graph_generated %}
+<div class="container rounded shadow-sm p-5">
+    <div class="row">
+        <div class="col">
+            <h1>Forecast 1</h1>
+            <img class="graph_image" src="{{ url_for('static', filename='image/graphs/forecast1.png') }}" alt="Forecast graph 1">
         </div>
-    </fieldset>
-</div>    
+        <div class="col">
+            <h1>Forecast 2</h1>
+            <img class="graph_image" src="{{ url_for('static', filename='image/graphs/forecast2.png') }}" alt="Forecast graph 2">
+        </div>
+    </div>
+</div>
+{% endif %}
+
 {% endblock content %} 
