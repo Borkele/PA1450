@@ -29,7 +29,7 @@
             <a class="nav-link" href="/custom-graph">Custom Graph</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="">Forecasts</a>
+            <a class="nav-link" href="/forecasts">Forecasts</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/summary">Summary</a>
@@ -48,6 +48,11 @@
           {% endfor %}
         {% endif %}
       {% endwith %}
+
+      <div class="d-flex p-3 my-3 rounded shadow-sm">
+        <img src="{{ url_for('static', filename='/image/map_pin.png') }}" alt="Map pin image" class="p-2" style="width:80px;height:80px;"></img>
+        <h1 class="text_primary p-2">Karlskrona</h1>
+      </div>
 
       {% block content %} {% endblock %}
     </main>

@@ -27,6 +27,7 @@
 
                     </div>
                 </div>
+
                 <div class="col">
                     <div class="form-group">
                         {{ form.start_date.label(class="form-control-label") }}
@@ -45,6 +46,7 @@
                         
                     </div>
                 </div>
+
                 <div class="col">
                     <div class="form-group">
                         {{ form.end_date.label(class="form-control-label") }}
@@ -61,7 +63,27 @@
                         {% endif %}
                     </div>
                 </div>
+
+                <div class="col">
+                    <div class="form-group">
+                        {{ form.time_frame.label(class="form-control-label") }}
+    
+                        {% if form.time_frame.errors %}
+                            {{ form.time_frame(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.time_frame.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        
+                        {% else %}
+                            {{ form.time_frame(class="form-control") }}
+                        {% endif %}
+                        
+                    </div>
+                </div>
             </div>
+
             <div class="row">
                 <div class="col">
                     <div class="form-group">

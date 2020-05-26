@@ -4,7 +4,7 @@ import os.path
 
 from API import getAPIJson, getAPIXML
 from graphGenerator import generateGraph
-from forms import graph_timeframe, select_weekday
+from forms import graph_timeframe, select_weekday, select_forecast
 from timeFrame import translateDateFormat, trimTimeFrame, getWeekdayIndex
 
 app = Flask(__name__)
@@ -32,9 +32,10 @@ def custom():
         start_date = translateDateFormat(str(form.start_date.data))
         end_date = translateDateFormat(str(form.end_date.data))
         data_type = form.data_type.data
+        time_frame = form.time_frame.data
         
         if(start_date < end_date):
-            graph_generated = generateGraph(trimTimeFrame(getAPIJson("month", data_type), start_date, end_date), "day", data_type, "custom")
+            graph_generated = generateGraph(trimTimeFrame(getAPIJson("month", data_type), start_date, end_date), time_frame, data_type, "custom")
             
             if(graph_generated):
                 flash("Graph successfully generated! You may have to refresh the page to see it.", 'success')
