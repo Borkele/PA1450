@@ -71,7 +71,7 @@ def custom_weekday():
 @app.route("/test", methods=["GET", "POST"])
 def test():
     data_frame = getAPIXML("temperature")
-    generateGraph(data_frame, "day", "temperature", "testGraph")
+    generateGraph(data_frame, "month", "temperature", "testGraph")
     return render_template('test.html')
 
 if __name__ == "__main__":
