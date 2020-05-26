@@ -86,7 +86,7 @@ def getAPIJson(timeFrame, dataType, forecast = False):
             if dataType == "temperature":
                 dict['value'] = float(time['parameters'][11]['values'][0])
             elif dataType == 'precipitation':
-                dict['value'] = float(time['parameters'][3]['values'][0])
+                dict['value'] = float(time['parameters'][4]['values'][0])
             elif dataType == 'wind':
                 dict['value'] = float(time['parameters'][14]['values'][0])
             elif dataType == 'pressure':
@@ -102,6 +102,8 @@ def getAPIJson(timeFrame, dataType, forecast = False):
         dataFrame['date'] = dateDf
         dataFrame['value'] = valueDf
         dataFrame.set_index(['date'], inplace=True)
+
+        dataFrame = dataFrame.head(46)
 
         return dataFrame
 
