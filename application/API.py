@@ -90,11 +90,11 @@ def getAPIXML(data_type):
     #root = tree.getroot()
     print(tree.tag)
     data = []
-    dict = {}
     for time in tree.iter('time'):
         start_date = time.attrib['from']
         #end_date = time.attrib['to']
         
+        dict = {}
         dict['date'] = start_date
         if data_type == "temperature":
             temp = float(time[4].attrib['value'])
