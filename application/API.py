@@ -103,7 +103,7 @@ def getAPIXML(data_type):
             precipitation_value = float(time[1].attrib['value'])
             dict['value'] = precipitation_value
         elif data_type == 'wind':
-            wind_speed = float(time[3].attirb['mps']) # meter per second
+            wind_speed = float(time[3].attrib['mps']) # meter per second
             dict['value'] = wind_speed
         elif data_type == 'pressure':
             pressure = float(time[5].attrib['value'])
